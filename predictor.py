@@ -81,7 +81,7 @@ while cap.isOpened():
         # image_count += 1
         # cv2.imwrite(img_name, image)
 
-    ref_image = cv2.resize(cv2.imread("ref_sheet.jpg"), (width, height), interpolation=cv2.INTER_AREA)
+    ref_image = cv2.resize(cv2.imread("refImages/ref_sheet.jpg"), (width, height), interpolation=cv2.INTER_AREA)
     numpy_horizontal_concat = np.concatenate((ref_image, image), axis=1)
     cv2.imshow('MediaPipe Hands', numpy_horizontal_concat)
     # cv2.imshow('MediaPipe Hands', image)
