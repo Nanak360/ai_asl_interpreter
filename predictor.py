@@ -7,8 +7,8 @@ import joblib
 import os
 
 # save_location = "captured_images"
-classifier = joblib.load('svm_2h')
-classifier_1h = joblib.load('svm_1h')
+classifier = joblib.load('trainedModels/svm_2h')
+classifier_1h = joblib.load('trainedModels/svm_1h')
 # os.mkdir(save_location)
 
 

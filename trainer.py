@@ -5,11 +5,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 import joblib
 
-dataset = pd.read_csv('bothHand.csv')
+dataset = pd.read_csv('trainingData/bothHand.csv')
 X = dataset.iloc[:, 1:].values
 y = dataset.iloc[:, 0].values
 
-dataset = pd.read_csv('singleHand.csv')
+dataset = pd.read_csv('trainingData/singleHand.csv')
 X1 = dataset.iloc[:, 1:].values
 y1 = dataset.iloc[:, 0].values
 
@@ -19,7 +19,7 @@ X_train1, X_test1, y_train1, y_test1 = train_test_split(X1, y1, test_size=0.1, r
 classifier = SVC(kernel='rbf', random_state=0)
 classifier.fit(X_train, y_train)
 
-joblib.dump(classifier, "svm_2h")
+joblib.dump(classifier, "trainedModels/svm_2h")
 y_pred = classifier.predict(X_test)
 from sklearn.metrics import confusion_matrix, accuracy_score
 
@@ -29,7 +29,7 @@ print(cm)
 print(accuracy_score(y_test, y_pred), "____________\n")
 
 classifier.fit(X_train1, y_train1)
-joblib.dump(classifier, "svm_1h")
+joblib.dump(classifier, "trainedModels/svm_1h")
 
 y_pred = classifier.predict(X_test1)
 from sklearn.metrics import confusion_matrix, accuracy_score

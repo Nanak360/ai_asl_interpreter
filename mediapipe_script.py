@@ -11,9 +11,9 @@ h2 = "ABDEFGHKMNPQRSTXYZWJ"
 chars = [chr(i) for i in range(65, 91)]
 imagesPerChar = 2500
 
-f_1h = open("singleHand.csv", "a", newline='')
+f_1h = open("trainingData/singleHand.csv", "a+", newline='')
 writer_f_1h = csv.writer(f_1h)
-f_2h = open("bothHand.csv", "a", newline='')
+f_2h = open("trainingData/bothHand.csv", "a+", newline='')
 writer_f_2h = csv.writer(f_2h)
 
 
@@ -53,7 +53,7 @@ while chars:
     print("Following characters are due -", chars)
     collect_for = input("Please enter the character you want to collect data for - ").upper()
     if collect_for not in chars:
-        print("-_- A to Z characters only!\n Start again")
+        print("A to Z characters only!\n Start again")
         continue
     if collect_for in h1:
         mnh = 1
@@ -113,13 +113,12 @@ while chars:
             for hand_landmarks in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(
                     image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-        ref_image = cv2.resize(cv2.imread("Images/"+str(collect_for)+".jpg"), (width, height), interpolation=cv2.INTER_AREA)
+        ref_image = cv2.resize(cv2.imread("refImages/"+str(collect_for)+".jpg"), (width, height), interpolation=cv2.INTER_AREA)
         numpy_horizontal_concat = np.concatenate((ref_image, image), axis=1)
         cv2.imshow('MediaPipe Hands', numpy_horizontal_concat)
         if cv2.waitKey(5) & 0xFF == 27 or count_captured == imagesPerChar:
             break
     hands.close()
-    # cap.release()
     cv2.destroyWindow("MediaPipe Hands")
     chars.remove(collect_for)
     print("- DONE\n\n")
